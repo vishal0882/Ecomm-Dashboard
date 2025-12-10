@@ -5,13 +5,13 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import { Gauge, Zap, MousePointerClick } from 'lucide-react'
 
 const vitalsData = [
-  { date: '2024-12-01', lcp: 2.1, fid: 45, cls: 0.08, fcp: 1.2, ttfb: 180 },
-  { date: '2024-12-02', lcp: 1.9, fid: 42, cls: 0.07, fcp: 1.1, ttfb: 175 },
-  { date: '2024-12-03', lcp: 2.3, fid: 48, cls: 0.09, fcp: 1.3, ttfb: 185 },
-  { date: '2024-12-04', lcp: 1.8, fid: 40, cls: 0.06, fcp: 1.0, ttfb: 170 },
-  { date: '2024-12-05', lcp: 2.0, fid: 43, cls: 0.08, fcp: 1.2, ttfb: 178 },
-  { date: '2024-12-06', lcp: 1.7, fid: 38, cls: 0.05, fcp: 0.9, ttfb: 165 },
-  { date: '2024-12-07', lcp: 1.9, fid: 41, cls: 0.07, fcp: 1.1, ttfb: 172 },
+  { date: 'Dec 01', lcp: 2.1, fid: 45, cls: 0.08, fcp: 1.2, ttfb: 180 },
+  { date: 'Dec 02', lcp: 1.9, fid: 42, cls: 0.07, fcp: 1.1, ttfb: 175 },
+  { date: 'Dec 03', lcp: 2.3, fid: 48, cls: 0.09, fcp: 1.3, ttfb: 185 },
+  { date: 'Dec 04', lcp: 1.8, fid: 40, cls: 0.06, fcp: 1.0, ttfb: 170 },
+  { date: 'Dec 05', lcp: 2.0, fid: 43, cls: 0.08, fcp: 1.2, ttfb: 178 },
+  { date: 'Dec 06', lcp: 1.7, fid: 38, cls: 0.05, fcp: 0.9, ttfb: 165 },
+  { date: 'Dec 07', lcp: 1.9, fid: 41, cls: 0.07, fcp: 1.1, ttfb: 172 },
 ]
 
 const deviceBreakdown = [
@@ -52,59 +52,62 @@ export default function CoreWebVitals() {
   const clsScore = clsStatus.status === 'good' ? 100 : clsStatus.status === 'needs improvement' ? 60 : 30
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       <div>
-        <h2 className="text-3xl font-bold mb-2">Core Web Vitals</h2>
-        <p className="text-muted-foreground">Monitor and optimize website performance metrics</p>
+        <h2 className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">Core Web Vitals</h2>
+        <p className="text-sm sm:text-base text-muted-foreground">Monitor and optimize website performance metrics</p>
       </div>
 
-      {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">LCP</CardTitle>
+      {/* Key Metrics - 1 col mobile, 3 cols tablet+ */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+        <Card className="glass-card">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-4 sm:px-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">LCP</CardTitle>
             <Gauge className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{latest.lcp}s</div>
-            <p className="text-xs text-muted-foreground mt-1 mb-2">Largest Contentful Paint</p>
+          <CardContent className="px-4 sm:px-6">
+            <div className="text-xl sm:text-2xl font-bold">{latest.lcp}s</div>
+            <p className="text-[10px] sm:text-xs text-muted-foreground mt-1 mb-2">Largest Contentful Paint</p>
             <Progress value={lcpScore} className="h-2 mb-2" />
             <Badge
               variant={lcpStatus.status === 'good' ? 'default' : lcpStatus.status === 'needs improvement' ? 'secondary' : 'destructive'}
+              className="text-[10px] sm:text-xs"
             >
               {lcpStatus.status}
             </Badge>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">FID</CardTitle>
+        <Card className="glass-card">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-4 sm:px-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">FID</CardTitle>
             <Zap className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{latest.fid}ms</div>
-            <p className="text-xs text-muted-foreground mt-1 mb-2">First Input Delay</p>
+          <CardContent className="px-4 sm:px-6">
+            <div className="text-xl sm:text-2xl font-bold">{latest.fid}ms</div>
+            <p className="text-[10px] sm:text-xs text-muted-foreground mt-1 mb-2">First Input Delay</p>
             <Progress value={fidScore} className="h-2 mb-2" />
             <Badge
               variant={fidStatus.status === 'good' ? 'default' : fidStatus.status === 'needs improvement' ? 'secondary' : 'destructive'}
+              className="text-[10px] sm:text-xs"
             >
               {fidStatus.status}
             </Badge>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">CLS</CardTitle>
+        <Card className="glass-card">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-4 sm:px-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">CLS</CardTitle>
             <MousePointerClick className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{latest.cls.toFixed(2)}</div>
-            <p className="text-xs text-muted-foreground mt-1 mb-2">Cumulative Layout Shift</p>
+          <CardContent className="px-4 sm:px-6">
+            <div className="text-xl sm:text-2xl font-bold">{latest.cls.toFixed(2)}</div>
+            <p className="text-[10px] sm:text-xs text-muted-foreground mt-1 mb-2">Cumulative Layout Shift</p>
             <Progress value={clsScore} className="h-2 mb-2" />
             <Badge
               variant={clsStatus.status === 'good' ? 'default' : clsStatus.status === 'needs improvement' ? 'secondary' : 'destructive'}
+              className="text-[10px] sm:text-xs"
             >
               {clsStatus.status}
             </Badge>
@@ -112,31 +115,31 @@ export default function CoreWebVitals() {
         </Card>
       </div>
 
-      {/* Additional Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>FCP</CardTitle>
-            <CardDescription>First Contentful Paint</CardDescription>
+      {/* Additional Metrics - 2 cols on mobile+ */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+        <Card className="glass-card">
+          <CardHeader className="px-4 sm:px-6">
+            <CardTitle className="text-base sm:text-lg">FCP</CardTitle>
+            <CardDescription className="text-xs sm:text-sm">First Contentful Paint</CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold mb-2">{latest.fcp}s</div>
+          <CardContent className="px-4 sm:px-6">
+            <div className="text-2xl sm:text-3xl font-bold mb-2">{latest.fcp}s</div>
             <Progress value={latest.fcp < 1.8 ? 100 : latest.fcp < 3.0 ? 60 : 30} className="h-2" />
-            <p className="text-xs text-muted-foreground mt-2">
+            <p className="text-[10px] sm:text-xs text-muted-foreground mt-2">
               {latest.fcp < 1.8 ? 'Good' : latest.fcp < 3.0 ? 'Needs Improvement' : 'Poor'}
             </p>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>TTFB</CardTitle>
-            <CardDescription>Time to First Byte</CardDescription>
+        <Card className="glass-card">
+          <CardHeader className="px-4 sm:px-6">
+            <CardTitle className="text-base sm:text-lg">TTFB</CardTitle>
+            <CardDescription className="text-xs sm:text-sm">Time to First Byte</CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold mb-2">{latest.ttfb}ms</div>
+          <CardContent className="px-4 sm:px-6">
+            <div className="text-2xl sm:text-3xl font-bold mb-2">{latest.ttfb}ms</div>
             <Progress value={latest.ttfb < 200 ? 100 : latest.ttfb < 500 ? 60 : 30} className="h-2" />
-            <p className="text-xs text-muted-foreground mt-2">
+            <p className="text-[10px] sm:text-xs text-muted-foreground mt-2">
               {latest.ttfb < 200 ? 'Good' : latest.ttfb < 500 ? 'Needs Improvement' : 'Poor'}
             </p>
           </CardContent>
@@ -144,44 +147,44 @@ export default function CoreWebVitals() {
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Core Web Vitals Trend</CardTitle>
-            <CardDescription>LCP, FID, and CLS over time</CardDescription>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+        <Card className="glass-card">
+          <CardHeader className="px-4 sm:px-6">
+            <CardTitle className="text-base sm:text-lg">Core Web Vitals Trend</CardTitle>
+            <CardDescription className="text-xs sm:text-sm">LCP, FID, and CLS over time</CardDescription>
           </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
+          <CardContent className="px-2 sm:px-6">
+            <ResponsiveContainer width="100%" height={250}>
               <LineChart data={vitalsData}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="date" />
-                <YAxis />
+                <XAxis dataKey="date" tick={{ fontSize: 10 }} />
+                <YAxis tick={{ fontSize: 10 }} />
                 <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="lcp" stroke="#8884d8" strokeWidth={2} name="LCP (s)" />
-                <Line type="monotone" dataKey="fid" stroke="#82ca9d" strokeWidth={2} name="FID (ms)" />
-                <Line type="monotone" dataKey="cls" stroke="#ffc658" strokeWidth={2} name="CLS" />
+                <Legend wrapperStyle={{ fontSize: 11 }} />
+                <Line type="monotone" dataKey="lcp" stroke="#10b981" strokeWidth={2} name="LCP (s)" />
+                <Line type="monotone" dataKey="fid" stroke="#3b82f6" strokeWidth={2} name="FID (ms)" />
+                <Line type="monotone" dataKey="cls" stroke="#f59e0b" strokeWidth={2} name="CLS" />
               </LineChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Performance by Device</CardTitle>
-            <CardDescription>Core Web Vitals breakdown by device type</CardDescription>
+        <Card className="glass-card">
+          <CardHeader className="px-4 sm:px-6">
+            <CardTitle className="text-base sm:text-lg">Performance by Device</CardTitle>
+            <CardDescription className="text-xs sm:text-sm">Core Web Vitals breakdown by device type</CardDescription>
           </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
+          <CardContent className="px-2 sm:px-6">
+            <ResponsiveContainer width="100%" height={250}>
               <BarChart data={deviceBreakdown}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="device" />
-                <YAxis />
+                <XAxis dataKey="device" tick={{ fontSize: 11 }} />
+                <YAxis tick={{ fontSize: 10 }} />
                 <Tooltip />
-                <Legend />
-                <Bar dataKey="lcp" fill="#8884d8" name="LCP (s)" />
-                <Bar dataKey="fid" fill="#82ca9d" name="FID (ms)" />
-                <Bar dataKey="cls" fill="#ffc658" name="CLS" />
+                <Legend wrapperStyle={{ fontSize: 11 }} />
+                <Bar dataKey="lcp" fill="#10b981" name="LCP (s)" />
+                <Bar dataKey="fid" fill="#3b82f6" name="FID (ms)" />
+                <Bar dataKey="cls" fill="#f59e0b" name="CLS" />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
@@ -189,51 +192,48 @@ export default function CoreWebVitals() {
       </div>
 
       {/* Device Breakdown Table */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Performance by Device Type</CardTitle>
-          <CardDescription>Detailed metrics across different devices</CardDescription>
+      <Card className="glass-card">
+        <CardHeader className="px-4 sm:px-6">
+          <CardTitle className="text-base sm:text-lg">Performance by Device Type</CardTitle>
+          <CardDescription className="text-xs sm:text-sm">Detailed metrics across different devices</CardDescription>
         </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {deviceBreakdown.map((device) => (
-              <div key={device.device} className="border rounded-lg p-4 space-y-3">
-                <div className="flex justify-between items-center">
-                  <h4 className="font-semibold">{device.device}</h4>
-                  <Badge variant="outline">{device.users.toLocaleString()} users</Badge>
+        <CardContent className="space-y-4 px-4 sm:px-6">
+          {deviceBreakdown.map((device) => (
+            <div key={device.device} className="border rounded-lg p-3 sm:p-4 space-y-3">
+              <div className="flex justify-between items-center">
+                <h4 className="font-semibold text-sm sm:text-base">{device.device}</h4>
+                <Badge variant="outline" className="text-[10px] sm:text-xs">{device.users.toLocaleString()} users</Badge>
+              </div>
+              <div className="grid grid-cols-3 gap-2 sm:gap-4">
+                <div>
+                  <p className="text-[10px] sm:text-sm text-muted-foreground">LCP</p>
+                  <p className="text-sm sm:text-lg font-semibold">{device.lcp}s</p>
+                  <Progress
+                    value={device.lcp < 2.5 ? 100 : device.lcp < 4.0 ? 60 : 30}
+                    className="h-1 mt-1"
+                  />
                 </div>
-                <div className="grid grid-cols-3 gap-4">
-                  <div>
-                    <p className="text-sm text-muted-foreground">LCP</p>
-                    <p className="text-lg font-semibold">{device.lcp}s</p>
-                    <Progress
-                      value={device.lcp < 2.5 ? 100 : device.lcp < 4.0 ? 60 : 30}
-                      className="h-1 mt-1"
-                    />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">FID</p>
-                    <p className="text-lg font-semibold">{device.fid}ms</p>
-                    <Progress
-                      value={device.fid < 100 ? 100 : device.fid < 300 ? 60 : 30}
-                      className="h-1 mt-1"
-                    />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">CLS</p>
-                    <p className="text-lg font-semibold">{device.cls.toFixed(2)}</p>
-                    <Progress
-                      value={device.cls < 0.1 ? 100 : device.cls < 0.25 ? 60 : 30}
-                      className="h-1 mt-1"
-                    />
-                  </div>
+                <div>
+                  <p className="text-[10px] sm:text-sm text-muted-foreground">FID</p>
+                  <p className="text-sm sm:text-lg font-semibold">{device.fid}ms</p>
+                  <Progress
+                    value={device.fid < 100 ? 100 : device.fid < 300 ? 60 : 30}
+                    className="h-1 mt-1"
+                  />
+                </div>
+                <div>
+                  <p className="text-[10px] sm:text-sm text-muted-foreground">CLS</p>
+                  <p className="text-sm sm:text-lg font-semibold">{device.cls.toFixed(2)}</p>
+                  <Progress
+                    value={device.cls < 0.1 ? 100 : device.cls < 0.25 ? 60 : 30}
+                    className="h-1 mt-1"
+                  />
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </CardContent>
       </Card>
     </div>
   )
 }
-

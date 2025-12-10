@@ -17,7 +17,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: 'assistant',
-      content: "Hello! I'm your e-commerce dashboard assistant. I can help you:\n\n📊 Generate reports (Sales, Customers, Performance, etc.)\n📧 Send emails with attached reports\n💬 Answer questions about your dashboard\n\nHow can I help you today?",
+      content: "Hello! I'm your dashboard assistant. I can help you:\n\n📊 Generate reports\n📧 Send emails with reports\n💬 Answer questions\n\nHow can I help?",
       timestamp: new Date()
     }
   ])
@@ -140,103 +140,104 @@ export default function Chatbot() {
 
   return (
     <>
-      <Card className="h-[600px] flex flex-col">
-        <CardHeader className="pb-3">
+      <Card className="h-[400px] sm:h-[500px] lg:h-[600px] flex flex-col glass-card">
+        <CardHeader className="pb-2 sm:pb-3 px-3 sm:px-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Bot className="h-5 w-5 text-primary" />
-              <CardTitle className="text-lg">Dashboard Assistant</CardTitle>
+              <Bot className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+              <CardTitle className="text-sm sm:text-lg">AI Assistant</CardTitle>
             </div>
-            <Badge variant="secondary">AI Powered</Badge>
+            <Badge variant="secondary" className="text-[10px] sm:text-xs">AI</Badge>
           </div>
         </CardHeader>
-        <CardContent className="flex-1 flex flex-col p-0">
-          <ScrollArea className="flex-1 px-4">
-            <div className="space-y-4 py-4">
+        <CardContent className="flex-1 flex flex-col p-0 overflow-hidden">
+          <ScrollArea className="flex-1 px-3 sm:px-4">
+            <div className="space-y-3 sm:space-y-4 py-3 sm:py-4">
               {messages.map((message, index) => (
                 <div
                   key={index}
-                  className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                  className={`flex gap-2 sm:gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   {message.role === 'assistant' && (
-                    <Avatar className="h-8 w-8">
+                    <Avatar className="h-6 w-6 sm:h-8 sm:w-8 flex-shrink-0">
                       <AvatarFallback className="bg-primary text-primary-foreground">
-                        <Bot className="h-4 w-4" />
+                        <Bot className="h-3 w-3 sm:h-4 sm:w-4" />
                       </AvatarFallback>
                     </Avatar>
                   )}
                   <div
-                    className={`rounded-lg px-4 py-2 max-w-[80%] ${
+                    className={`rounded-lg px-3 py-2 max-w-[85%] sm:max-w-[80%] ${
                       message.role === 'user'
                         ? 'bg-primary text-primary-foreground'
                         : 'bg-muted'
                     }`}
                   >
-                    <p className="text-sm whitespace-pre-wrap">{message.content}</p>
-                    <p className="text-xs opacity-70 mt-1">
-                      {message.timestamp.toLocaleTimeString()}
+                    <p className="text-xs sm:text-sm whitespace-pre-wrap">{message.content}</p>
+                    <p className="text-[10px] sm:text-xs opacity-70 mt-1">
+                      {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </p>
                   </div>
                   {message.role === 'user' && (
-                    <Avatar className="h-8 w-8">
+                    <Avatar className="h-6 w-6 sm:h-8 sm:w-8 flex-shrink-0">
                       <AvatarFallback className="bg-secondary">
-                        <User className="h-4 w-4" />
+                        <User className="h-3 w-3 sm:h-4 sm:w-4" />
                       </AvatarFallback>
                     </Avatar>
                   )}
                 </div>
               ))}
               {isLoading && (
-                <div className="flex gap-3 justify-start">
-                  <Avatar className="h-8 w-8">
+                <div className="flex gap-2 sm:gap-3 justify-start">
+                  <Avatar className="h-6 w-6 sm:h-8 sm:w-8">
                     <AvatarFallback className="bg-primary text-primary-foreground">
-                      <Bot className="h-4 w-4" />
+                      <Bot className="h-3 w-3 sm:h-4 sm:w-4" />
                     </AvatarFallback>
                   </Avatar>
-                  <div className="rounded-lg px-4 py-2 bg-muted">
-                    <Loader2 className="h-4 w-4 animate-spin" />
+                  <div className="rounded-lg px-3 py-2 bg-muted">
+                    <Loader2 className="h-3 w-3 sm:h-4 sm:w-4 animate-spin" />
                   </div>
                 </div>
               )}
               <div ref={scrollRef} />
             </div>
           </ScrollArea>
-          <div className="border-t p-4">
+          <div className="border-t p-3 sm:p-4">
             <div className="flex gap-2">
               <Input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Ask about reports, send emails, or get insights..."
+                placeholder="Ask anything..."
                 disabled={isLoading}
-                className="flex-1"
+                className="flex-1 text-sm h-9 sm:h-10"
               />
               <Button
                 onClick={handleSend}
                 disabled={isLoading || !input.trim()}
                 size="icon"
+                className="h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0"
               >
                 <Send className="h-4 w-4" />
               </Button>
             </div>
-            <div className="flex gap-2 mt-2">
+            <div className="flex gap-2 mt-2 overflow-x-auto pb-1">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => setInput('Generate a sales report')}
-                className="text-xs"
+                className="text-[10px] sm:text-xs h-7 sm:h-8 px-2 sm:px-3 whitespace-nowrap flex-shrink-0"
               >
                 <FileText className="h-3 w-3 mr-1" />
-                Sales Report
+                Sales
               </Button>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => setInput('Send customer report to manager@company.com as PDF')}
-                className="text-xs"
+                className="text-[10px] sm:text-xs h-7 sm:h-8 px-2 sm:px-3 whitespace-nowrap flex-shrink-0"
               >
                 <Mail className="h-3 w-3 mr-1" />
-                Email Report
+                Email
               </Button>
             </div>
           </div>
@@ -245,65 +246,67 @@ export default function Chatbot() {
 
       {/* Email Confirmation Dialog */}
       <Dialog open={emailDialogOpen} onOpenChange={setEmailDialogOpen}>
-        <DialogContent>
+        <DialogContent className="max-w-[95vw] sm:max-w-lg mx-auto">
           <DialogHeader>
-            <DialogTitle>Send Email with Report</DialogTitle>
-            <DialogDescription>
-              Review and confirm the email details before sending
+            <DialogTitle className="text-base sm:text-lg">Send Email with Report</DialogTitle>
+            <DialogDescription className="text-xs sm:text-sm">
+              Review and confirm the email details
             </DialogDescription>
           </DialogHeader>
           {emailRequest && (
-            <div className="space-y-4 py-4">
+            <div className="space-y-3 sm:space-y-4 py-2 sm:py-4">
               <div>
-                <Label>To</Label>
-                <Input value={emailRequest.to} disabled />
+                <Label className="text-xs sm:text-sm">To</Label>
+                <Input value={emailRequest.to} disabled className="text-sm h-9" />
               </div>
               <div>
-                <Label>Subject</Label>
-                <Input value={emailRequest.subject} disabled />
+                <Label className="text-xs sm:text-sm">Subject</Label>
+                <Input value={emailRequest.subject} disabled className="text-sm h-9" />
               </div>
               <div>
-                <Label>Message</Label>
-                <Textarea value={emailRequest.body} disabled rows={3} />
+                <Label className="text-xs sm:text-sm">Message</Label>
+                <Textarea value={emailRequest.body} disabled rows={2} className="text-sm" />
               </div>
               <div>
-                <Label>Attachments</Label>
-                <div className="space-y-2 mt-2">
+                <Label className="text-xs sm:text-sm">Attachments</Label>
+                <div className="flex flex-wrap gap-2 mt-2">
                   {emailRequest.attachments.map((att, idx) => (
-                    <Badge key={idx} variant="outline" className="mr-2">
+                    <Badge key={idx} variant="outline" className="text-xs">
                       <FileText className="h-3 w-3 mr-1" />
-                      {att.type.charAt(0).toUpperCase() + att.type.slice(1)} ({att.format.toUpperCase()})
+                      {att.type} ({att.format})
                     </Badge>
                   ))}
                 </div>
               </div>
               {emailStatus && (
-                <div className={`flex items-center gap-2 p-3 rounded-md ${
+                <div className={`flex items-center gap-2 p-2 sm:p-3 rounded-md text-xs sm:text-sm ${
                   emailStatus.success ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'
                 }`}>
                   {emailStatus.success ? (
-                    <CheckCircle2 className="h-4 w-4" />
+                    <CheckCircle2 className="h-4 w-4 flex-shrink-0" />
                   ) : (
-                    <AlertCircle className="h-4 w-4" />
+                    <AlertCircle className="h-4 w-4 flex-shrink-0" />
                   )}
-                  <span className="text-sm">{emailStatus.message}</span>
+                  <span>{emailStatus.message}</span>
                 </div>
               )}
             </div>
           )}
-          <DialogFooter>
+          <DialogFooter className="flex-col sm:flex-row gap-2">
             <Button
               variant="outline"
               onClick={() => {
                 setEmailDialogOpen(false)
                 setEmailStatus(null)
               }}
+              className="w-full sm:w-auto"
             >
               Cancel
             </Button>
             <Button
               onClick={handleEmailSend}
               disabled={isLoading}
+              className="w-full sm:w-auto"
             >
               {isLoading ? (
                 <>
@@ -323,4 +326,3 @@ export default function Chatbot() {
     </>
   )
 }
-

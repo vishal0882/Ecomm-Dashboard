@@ -6,9 +6,9 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, BarChart, Ba
 import { Users, UserPlus, DollarSign, TrendingUp } from 'lucide-react'
 
 const customerSegments = [
-  { name: 'New Customers', value: 35, color: '#8884d8' },
-  { name: 'Returning Customers', value: 45, color: '#82ca9d' },
-  { name: 'VIP Customers', value: 20, color: '#ffc658' },
+  { name: 'New Customers', value: 35, color: '#10b981' },
+  { name: 'Returning Customers', value: 45, color: '#3b82f6' },
+  { name: 'VIP Customers', value: 20, color: '#f59e0b' },
 ]
 
 const customerGrowth = [
@@ -36,9 +36,9 @@ const cacData = [
 ]
 
 const radialData = [
-  { name: 'New Customers', value: 35, fill: '#8884d8' },
-  { name: 'Returning', value: 45, fill: '#82ca9d' },
-  { name: 'VIP', value: 20, fill: '#ffc658' },
+  { name: 'New Customers', value: 35, fill: '#10b981' },
+  { name: 'Returning', value: 45, fill: '#3b82f6' },
+  { name: 'VIP', value: 20, fill: '#f59e0b' },
 ]
 
 export default function Customers() {
@@ -48,81 +48,81 @@ export default function Customers() {
   const avgCAC = cacData.reduce((sum, c) => sum + (c.cost * c.customers), 0) / cacData.reduce((sum, c) => sum + c.customers, 0)
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       <div>
-        <h2 className="text-3xl font-bold mb-2">Customers Dashboard</h2>
-        <p className="text-muted-foreground">Customer insights, CLV, CAC, and segmentation</p>
+        <h2 className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">Customers Dashboard</h2>
+        <p className="text-sm sm:text-base text-muted-foreground">Customer insights, CLV, CAC, and segmentation</p>
       </div>
 
-      {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Customers</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
+      {/* Key Metrics - 2 cols mobile, 4 cols desktop */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+        <Card className="glass-card">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-6 sm:pb-2">
+            <CardTitle className="text-[10px] sm:text-sm font-medium">Total Customers</CardTitle>
+            <Users className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{totalCustomers.toLocaleString()}</div>
-            <p className="text-xs text-muted-foreground flex items-center mt-1">
-              <TrendingUp className="h-3 w-3 mr-1 text-green-600" />
-              <span className="text-green-600">+{newCustomers}</span> new this month
+          <CardContent className="p-3 pt-0 sm:p-6 sm:pt-0">
+            <div className="text-lg sm:text-2xl font-bold">{totalCustomers.toLocaleString()}</div>
+            <p className="text-[9px] sm:text-xs text-muted-foreground flex items-center mt-1">
+              <TrendingUp className="h-2.5 w-2.5 sm:h-3 sm:w-3 mr-1 text-green-600" />
+              <span className="text-green-600">+{newCustomers}</span> new
             </p>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">New Customers</CardTitle>
-            <UserPlus className="h-4 w-4 text-muted-foreground" />
+        <Card className="glass-card">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-6 sm:pb-2">
+            <CardTitle className="text-[10px] sm:text-sm font-medium">New Customers</CardTitle>
+            <UserPlus className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{newCustomers}</div>
-            <p className="text-xs text-muted-foreground flex items-center mt-1">
-              <TrendingUp className="h-3 w-3 mr-1 text-green-600" />
-              <span className="text-green-600">+15%</span> growth rate
+          <CardContent className="p-3 pt-0 sm:p-6 sm:pt-0">
+            <div className="text-lg sm:text-2xl font-bold">{newCustomers}</div>
+            <p className="text-[9px] sm:text-xs text-muted-foreground flex items-center mt-1">
+              <TrendingUp className="h-2.5 w-2.5 sm:h-3 sm:w-3 mr-1 text-green-600" />
+              <span className="text-green-600">+15%</span> growth
             </p>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Avg CLV</CardTitle>
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
+        <Card className="glass-card">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-6 sm:pb-2">
+            <CardTitle className="text-[10px] sm:text-sm font-medium">Avg CLV</CardTitle>
+            <DollarSign className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">${(avgCLV / 1000).toFixed(1)}k</div>
-            <p className="text-xs text-muted-foreground">Customer Lifetime Value</p>
+          <CardContent className="p-3 pt-0 sm:p-6 sm:pt-0">
+            <div className="text-lg sm:text-2xl font-bold">${(avgCLV / 1000).toFixed(1)}k</div>
+            <p className="text-[9px] sm:text-xs text-muted-foreground">Lifetime Value</p>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Avg CAC</CardTitle>
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
+        <Card className="glass-card">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-6 sm:pb-2">
+            <CardTitle className="text-[10px] sm:text-sm font-medium">Avg CAC</CardTitle>
+            <DollarSign className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">${avgCAC.toFixed(2)}</div>
-            <p className="text-xs text-muted-foreground">Customer Acquisition Cost</p>
+          <CardContent className="p-3 pt-0 sm:p-6 sm:pt-0">
+            <div className="text-lg sm:text-2xl font-bold">${avgCAC.toFixed(2)}</div>
+            <p className="text-[9px] sm:text-xs text-muted-foreground">Acquisition Cost</p>
           </CardContent>
         </Card>
       </div>
 
-      {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Customer Segments</CardTitle>
-            <CardDescription>Distribution of customer types</CardDescription>
+      {/* Charts - stack on mobile */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+        <Card className="glass-card">
+          <CardHeader className="px-4 sm:px-6">
+            <CardTitle className="text-base sm:text-lg">Customer Segments</CardTitle>
+            <CardDescription className="text-xs sm:text-sm">Distribution of customer types</CardDescription>
           </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
+          <CardContent className="px-2 sm:px-6">
+            <ResponsiveContainer width="100%" height={250}>
               <PieChart>
                 <Pie
                   data={customerSegments}
                   cx="50%"
                   cy="50%"
                   labelLine={false}
-                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                  label={({ name, percent }) => `${(percent * 100).toFixed(0)}%`}
                   outerRadius={80}
                   fill="#8884d8"
                   dataKey="value"
@@ -132,27 +132,27 @@ export default function Customers() {
                   ))}
                 </Pie>
                 <Tooltip />
-                <Legend />
+                <Legend wrapperStyle={{ fontSize: 12 }} />
               </PieChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Customer Growth</CardTitle>
-            <CardDescription>New vs returning customers over time</CardDescription>
+        <Card className="glass-card">
+          <CardHeader className="px-4 sm:px-6">
+            <CardTitle className="text-base sm:text-lg">Customer Growth</CardTitle>
+            <CardDescription className="text-xs sm:text-sm">New vs returning customers over time</CardDescription>
           </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
+          <CardContent className="px-2 sm:px-6">
+            <ResponsiveContainer width="100%" height={250}>
               <BarChart data={customerGrowth}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="month" />
-                <YAxis />
+                <XAxis dataKey="month" tick={{ fontSize: 12 }} />
+                <YAxis tick={{ fontSize: 12 }} />
                 <Tooltip />
-                <Legend />
-                <Bar dataKey="new" fill="#8884d8" name="New Customers" />
-                <Bar dataKey="returning" fill="#82ca9d" name="Returning Customers" />
+                <Legend wrapperStyle={{ fontSize: 12 }} />
+                <Bar dataKey="new" fill="#10b981" name="New Customers" />
+                <Bar dataKey="returning" fill="#3b82f6" name="Returning" />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
@@ -160,13 +160,13 @@ export default function Customers() {
       </div>
 
       {/* Radial Chart */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Customer Distribution Radial Chart</CardTitle>
-          <CardDescription>Customer segment breakdown with labeled values</CardDescription>
+      <Card className="glass-card">
+        <CardHeader className="px-4 sm:px-6">
+          <CardTitle className="text-base sm:text-lg">Customer Distribution</CardTitle>
+          <CardDescription className="text-xs sm:text-sm">Segment breakdown with labeled values</CardDescription>
         </CardHeader>
-        <CardContent>
-          <ResponsiveContainer width="100%" height={400}>
+        <CardContent className="px-2 sm:px-6">
+          <ResponsiveContainer width="100%" height={300}>
             <RadialBarChart
               cx="50%"
               cy="50%"
@@ -182,7 +182,7 @@ export default function Customers() {
                 label={{
                   position: 'insideStart',
                   fill: '#fff',
-                  fontSize: 14,
+                  fontSize: 12,
                   fontWeight: 'bold',
                   formatter: (value: number) => {
                     if (typeof value === 'number' && !isNaN(value)) {
@@ -193,7 +193,7 @@ export default function Customers() {
                 }}
               >
                 {radialData.map((entry, index) => (
-                  <Cell key={`radial-cell-${index}`} fill={entry.fill || '#8884d8'} />
+                  <Cell key={`radial-cell-${index}`} fill={entry.fill || '#10b981'} />
                 ))}
               </RadialBar>
               <Tooltip
@@ -201,90 +201,72 @@ export default function Customers() {
                   const numValue = typeof value === 'number' ? value : parseFloat(String(value))
                   return [`${numValue}%`, 'Percentage']
                 }}
-                labelFormatter={(label) => {
-                  const entry = radialData.find(d => d.name === label)
-                  return entry ? entry.name : label
-                }}
-                contentStyle={{
-                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                  border: 'none',
-                  borderRadius: '4px',
-                  color: '#fff'
-                }}
               />
-              <Legend
-                iconSize={12}
-                layout="vertical"
-                verticalAlign="middle"
-                align="right"
-                formatter={(value) => {
-                  const entry = radialData.find(d => d.name === value)
-                  return entry ? entry.name : value
-                }}
-              />
+              <Legend wrapperStyle={{ fontSize: 12 }} iconSize={10} />
             </RadialBarChart>
           </ResponsiveContainer>
         </CardContent>
       </Card>
 
       {/* CAC by Channel */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Customer Acquisition Cost by Channel</CardTitle>
-          <CardDescription>CAC breakdown across different marketing channels</CardDescription>
+      <Card className="glass-card">
+        <CardHeader className="px-4 sm:px-6">
+          <CardTitle className="text-base sm:text-lg">Customer Acquisition Cost by Channel</CardTitle>
+          <CardDescription className="text-xs sm:text-sm">CAC breakdown across marketing channels</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4 px-4 sm:px-6">
           {cacData.map((item) => (
             <div key={item.channel} className="space-y-2">
-              <div className="flex justify-between text-sm">
+              <div className="flex justify-between text-xs sm:text-sm">
                 <span>{item.channel}</span>
-                <span className="font-medium">${item.cost} per customer</span>
+                <span className="font-medium">${item.cost}/customer</span>
               </div>
               <Progress value={(item.customers / 1000) * 100} className="h-2" />
-              <p className="text-xs text-muted-foreground">{item.customers} customers acquired</p>
+              <p className="text-[10px] sm:text-xs text-muted-foreground">{item.customers} customers acquired</p>
             </div>
           ))}
         </CardContent>
       </Card>
 
       {/* Top Customers Table */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Top Customers</CardTitle>
-          <CardDescription>Highest value customers by CLV</CardDescription>
+      <Card className="glass-card">
+        <CardHeader className="px-4 sm:px-6">
+          <CardTitle className="text-base sm:text-lg">Top Customers</CardTitle>
+          <CardDescription className="text-xs sm:text-sm">Highest value customers by CLV</CardDescription>
         </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Name</TableHead>
-                <TableHead>Email</TableHead>
-                <TableHead>Orders</TableHead>
-                <TableHead>Total Spent</TableHead>
-                <TableHead>CLV</TableHead>
-                <TableHead>Status</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {topCustomers.map((customer) => (
-                <TableRow key={customer.id}>
-                  <TableCell className="font-medium">{customer.name}</TableCell>
-                  <TableCell>{customer.email}</TableCell>
-                  <TableCell>{customer.orders}</TableCell>
-                  <TableCell>${customer.totalSpent.toLocaleString()}</TableCell>
-                  <TableCell>${customer.clv.toLocaleString()}</TableCell>
-                  <TableCell>
-                    <Badge variant={customer.status === 'VIP' ? 'default' : 'secondary'}>
-                      {customer.status}
-                    </Badge>
-                  </TableCell>
+        <CardContent className="px-0 sm:px-6">
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="text-xs whitespace-nowrap">Name</TableHead>
+                  <TableHead className="text-xs whitespace-nowrap hidden sm:table-cell">Email</TableHead>
+                  <TableHead className="text-xs whitespace-nowrap">Orders</TableHead>
+                  <TableHead className="text-xs whitespace-nowrap hidden md:table-cell">Total Spent</TableHead>
+                  <TableHead className="text-xs whitespace-nowrap">CLV</TableHead>
+                  <TableHead className="text-xs whitespace-nowrap">Status</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {topCustomers.map((customer) => (
+                  <TableRow key={customer.id}>
+                    <TableCell className="text-xs sm:text-sm font-medium whitespace-nowrap">{customer.name}</TableCell>
+                    <TableCell className="text-xs sm:text-sm hidden sm:table-cell">{customer.email}</TableCell>
+                    <TableCell className="text-xs sm:text-sm">{customer.orders}</TableCell>
+                    <TableCell className="text-xs sm:text-sm hidden md:table-cell">${customer.totalSpent.toLocaleString()}</TableCell>
+                    <TableCell className="text-xs sm:text-sm whitespace-nowrap">${customer.clv.toLocaleString()}</TableCell>
+                    <TableCell>
+                      <Badge variant={customer.status === 'VIP' ? 'default' : 'secondary'} className="text-[10px] sm:text-xs">
+                        {customer.status}
+                      </Badge>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         </CardContent>
       </Card>
     </div>
   )
 }
-
